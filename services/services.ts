@@ -1,5 +1,5 @@
 import { deleteAuthCookie } from "@/actions/auth.action";
-import { BASE_URL } from "@/constants/constant";
+import { BASE_URL } from "@/constants/constants";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Router from "next/router";

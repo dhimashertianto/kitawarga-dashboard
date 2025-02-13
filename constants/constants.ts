@@ -1,5 +1,7 @@
 const BASE_URL = "https://kitawarga.com/api";
 
+// Endpoints
+
 const Login = "/api/auth/signin";
 const GetBulan = "/api/admin/list/bulan";
 const DetailWarga = "/api/admin/profil/warga";
