@@ -1,0 +1,58 @@
+// components/accounts/table/data.ts
+export const columns = [
+  { uid: "nama_perumahan", name: "Perumahan" },
+  { uid: "alamat_perumahan", name: "Alamat" },
+  { uid: "actions", name: "Actions" },
+];
+
+// Example data for perumahan
+export const perumahan = [
+  {
+    id_perumahan: "6503c9d9d6d4261420ab6ee5",
+    nama_perumahan: "Lamtoro Park",
+    alamat_perumahan: "Jln. Lamtoro Perumahan Lamtoro Park Pamulang Timur",
+    link_cctv: "soon",
+    link_img_qr: "soon",
+    saldo_perumahan: "12218213",
+    alamat_maps: "Soon",
+    createdAt: "2023-08-06T07:10:49.703Z",
+    updatedAt: "2025-02-06T06:20:41.977Z",
+    bank_code: "Maybank",
+    account_holder_name: "Reza Adhiguna Ramdani",
+    account_number: "8774000710",
+    status_account: "0",
+    expired_sub: null,
+  },
+  {
+    id_perumahan: "cdc65270-aa31-11ee-bc7e-51d580052c5a",
+    nama_perumahan: "Lestari",
+    alamat_perumahan: "mana aja yang penting bahagia",
+    link_cctv: "",
+    link_img_qr: "",
+    saldo_perumahan: "0",
+    alamat_maps: "",
+    createdAt: "2024-01-03T12:15:37.752Z",
+    updatedAt: "2024-01-03T12:15:37.752Z",
+    bank_code: "",
+    account_holder_name: "",
+    account_number: "",
+    status_account: "0",
+    expired_sub: null,
+  },
+  {
+    id_perumahan: "65815c9a1dea4d1af6cde4c6",
+    nama_perumahan: "Demo Park",
+    alamat_perumahan: "Jln. Mana Aja Sawah Baru Ciputat",
+    link_cctv: "soon",
+    link_img_qr: "soon",
+    saldo_perumahan: "14767763",
+    alamat_maps: "Soon",
+    createdAt: "2023-08-06T07:10:49.703Z",
+    updatedAt: "2025-01-30T11:44:03.895Z",
+    bank_code: "Maybank",
+    account_holder_name: "Reza Adhiguna Ramdani",
+    account_number: "8774000710",
+    status_account: "1",
+    expired_sub: "2026-10-15T09:41:11.836Z",
+  },
+];
