@@ -24,9 +24,7 @@ export const Detailperumahan = ({
     useState<DetailPerumahanType | null>(null);
 
   const handleViewDetails = () => {
-    setPerumahanDetails(
-      perumahan.find((item) => item.id_perumahan === items.id_perumahan)
-    );
+    setPerumahanDetails(items);
     onOpen();
   };
 

@@ -10,8 +10,19 @@ import {
 import React from "react";
 import { columns, perumahan } from "./data"; // Import data
 import { RenderCell } from "./render-cells"; // Import RenderCell function
+import { Detailperumahan } from "../detail";
+import { DetailPerumahanType } from "@/helpers/types";
 
-export const TableWrapper = () => {
+/**
+ * A table component that renders a list of perumahan items.
+ *
+ * @param { { items: DetailPerumahanType[] } } props The props object.
+ * @param { DetailPerumahanType[] } props.items The list of perumahan items to render.
+ * @returns { JSX.Element } The table component.
+ */
+export const TableWrapper: React.FC<{
+  items: DetailPerumahanType[];
+}> = ({ items }) => {
   return (
     <div className="w-full flex flex-col gap-4">
       <Table aria-label="Example table with custom cells">
@@ -26,12 +37,12 @@ export const TableWrapper = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={perumahan}>
+        <TableBody items={items}>
           {(item) => (
             <TableRow key={item.id_perumahan}>
               {(columnKey) => (
                 <TableCell key={columnKey}>
-                  {RenderCell({ user: item, columnKey })}
+                  {RenderCell({ perumahan: item, columnKey })}
                 </TableCell>
               )}
             </TableRow>

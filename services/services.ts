@@ -8,6 +8,7 @@ const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
+    "x-access-token": Cookies.get("token") || "",
   },
 });
 
