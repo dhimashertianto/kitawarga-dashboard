@@ -9,6 +9,7 @@ const Payment = "/api/admin/invoice/generate";
 const ListPayment = "/api/admin/list/pemasukan_user_invoice";
 
 const Listperumahan = "/api/admin/list/perumahan";
+const EditPerumahan = "/api/admin/update/perumahan";
 
 export {
   BASE_URL,
@@ -18,4 +19,5 @@ export {
   Payment,
   ListPayment,
   Listperumahan,
+  EditPerumahan,
 };

@@ -1,6 +1,6 @@
 // accounts.tsx
 "use client";
-import { fetchData } from "@/actions/api";
+import { getData } from "@/actions/api";
 import { TableWrapper } from "@/components/accounts/table/table"; // Import the table component
 import { DotsIcon } from "@/components/icons/accounts/dots-icon";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
@@ -30,7 +30,7 @@ export const Accounts = () => {
 
   const getPerumahan = async () => {
     try {
-      const response = await fetchData(Listperumahan);
+      const response = await getData(Listperumahan);
       setPerumahan(response.data);
     } catch (error: unknown) {
       if (error instanceof Error) {

@@ -1,4 +1,7 @@
+import { fetchData } from "@/actions/api";
+import { EditPerumahan } from "@/constants/constants";
 import { DetailPerumahanType } from "@/helpers/types";
+import { Spinner } from "@heroui/react";
 import {
   Button,
   Input,
@@ -11,9 +14,10 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
-import { EyeIcon } from "../icons/table/eye-icon";
+import { ErrorAlert } from "../alert/alert";
+import { EditIcon } from "../icons/table/edit-icon";
 
-export const Detailperumahan = ({
+export const Editperumahan = ({
   items,
 }: {
   items: DetailPerumahanType;
@@ -21,10 +25,57 @@ export const Detailperumahan = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [perumahanDetails, setPerumahanDetails] =
     useState<DetailPerumahanType | null>(null);
+  const [namaPerumahan, setNamaPerumahan] = useState<string>(
+    items.nama_perumahan
+  );
+  const [alamatPerumahan, setAlamatPerumahan] = useState<string>(
+    items.alamat_perumahan
+  );
+  const [loading, setLoading] = useState(false);
+  const [isEditError, setIsEditError] = useState(false);
+  const [isEditErrorrMessage, setIsEditErrorMessage] = useState("");
 
   const handleViewDetails = () => {
     setPerumahanDetails(items);
+    setNamaPerumahan(items.nama_perumahan);
+    setAlamatPerumahan(items.alamat_perumahan);
     onOpen();
+  };
+
+  const handleNamaPerumahanChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setNamaPerumahan(e.target.value);
+  };
+
+  const handleAlamatPerumahanChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAlamatPerumahan(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      await fetchData(EditPerumahan, {
+        id_perumahan: perumahanDetails?.id_perumahan,
+        nama_perumahan: namaPerumahan,
+        alamat_perumahan: alamatPerumahan,
+      });
+      setIsEditErrorMessage("success");
+      setIsEditError(true);
+      onClose();
+      window.location.reload();
+    } catch (error) {
+      setIsEditErrorMessage(error.response?.data?.message);
+      setIsEditError(true);
+    } finally {
+      setTimeout(() => {
+        setIsEditErrorMessage("");
+        setIsEditError(false);
+      }, 2500);
+      setLoading(false);
+    }
   };
 
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
@@ -35,9 +86,9 @@ export const Detailperumahan = ({
 
   return (
     <div>
-      <Tooltip content="View Details">
+      <Tooltip content="Edit Details">
         <button onClick={handleViewDetails}>
-          <EyeIcon size={20} fill="#979797" />
+          <EditIcon size={20} fill="#979797" />
         </button>
       </Tooltip>
 
@@ -49,6 +100,9 @@ export const Detailperumahan = ({
         placement="top-center"
       >
         <ModalContent>
+          {isEditError && (
+            <ErrorAlert title={isEditErrorrMessage} color="success" />
+          )}
           <ModalHeader className="flex flex-col gap-1">
             Perumahan Details
           </ModalHeader>
@@ -64,15 +118,15 @@ export const Detailperumahan = ({
                 />
                 <Input
                   label="Nama Perumahan"
-                  value={perumahanDetails.nama_perumahan}
-                  variant="flat"
-                  readOnly
+                  value={namaPerumahan}
+                  variant="bordered"
+                  onChange={handleNamaPerumahanChange}
                 />
                 <Input
                   label="Alamat Perumahan"
-                  value={perumahanDetails.alamat_perumahan}
-                  variant="flat"
-                  readOnly
+                  value={alamatPerumahan}
+                  variant="bordered"
+                  onChange={handleAlamatPerumahanChange}
                 />
                 <Input
                   label="Saldo"
@@ -102,11 +156,17 @@ export const Detailperumahan = ({
             )}
           </ModalBody>
           <ModalFooter>
+            <Button
+              color="success"
+              variant="bordered"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? <Spinner size="sm" color="primary" /> : "Save"}
+            </Button>
+
             <Button color="danger" variant="flat" onClick={onClose}>
               Close
-            </Button>
-            <Button color="danger" variant="bordered" onClick={onClose}>
-              Delete
             </Button>
           </ModalFooter>
         </ModalContent>

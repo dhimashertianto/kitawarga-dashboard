@@ -5,6 +5,8 @@ import { EditIcon } from "../../icons/table/edit-icon";
 import { EyeIcon } from "../../icons/table/eye-icon";
 import { Detailperumahan } from "../detail";
 import { DetailPerumahanType } from "@/helpers/types";
+import { formatCurrency } from "@/helpers/format";
+import { Editperumahan } from "../edit";
 
 /**
  * Renders a cell in the table, taking into account the column key and the data type.
@@ -38,6 +40,12 @@ export const RenderCell = ({
           <span>{perumahan.alamat_perumahan}</span>
         </div>
       );
+    case "saldo_perumahan":
+      return (
+        <div>
+          <span>{formatCurrency(parseInt(perumahan.saldo_perumahan))}</span>
+        </div>
+      );
     case "actions":
       return (
         <div className="flex items-center gap-4 ">
@@ -45,13 +53,7 @@ export const RenderCell = ({
             <Detailperumahan items={perumahan} />
           </Tooltip>
           <Tooltip content="Edit perumahan" color="secondary">
-            <button
-              onClick={() =>
-                console.log("Edit perumahan", perumahan.id_perumahan)
-              }
-            >
-              <EditIcon size={20} fill="#979797" />
-            </button>
+            <Editperumahan items={perumahan} />
           </Tooltip>
           <Tooltip content="Delete perumahan" color="secondary">
             <button

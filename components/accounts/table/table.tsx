@@ -1,4 +1,5 @@
 // components/accounts/table/table.tsx
+import { DetailPerumahanType } from "@/helpers/types";
 import {
   Table,
   TableBody,
@@ -8,10 +9,8 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import React from "react";
-import { columns, perumahan } from "./data"; // Import data
+import { columns } from "./data"; // Import data
 import { RenderCell } from "./render-cells"; // Import RenderCell function
-import { Detailperumahan } from "../detail";
-import { DetailPerumahanType } from "@/helpers/types";
 
 /**
  * A table component that renders a list of perumahan items.
