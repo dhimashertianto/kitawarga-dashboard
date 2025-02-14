@@ -50,8 +50,6 @@ export const fetchData = async <T>(
   }
 
   try {
-    console.log("payload", payload);
-
     const { status, data } = await axios.post(
       `${BASE_URL}${endpoint}`,
       payload,

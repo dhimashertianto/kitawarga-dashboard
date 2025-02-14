@@ -3,10 +3,11 @@ import { Tooltip } from "@nextui-org/react";
 import { DeleteIcon } from "../../icons/table/delete-icon";
 import { EditIcon } from "../../icons/table/edit-icon";
 import { EyeIcon } from "../../icons/table/eye-icon";
-import { Detailperumahan } from "../detail";
+import { DetailPerumahan } from "../detail";
 import { DetailPerumahanType } from "@/helpers/types";
 import { formatCurrency } from "@/helpers/format";
 import { Editperumahan } from "../edit";
+import { DeletePerumahan } from "../delete";
 
 /**
  * Renders a cell in the table, taking into account the column key and the data type.
@@ -50,19 +51,13 @@ export const RenderCell = ({
       return (
         <div className="flex items-center gap-4 ">
           <Tooltip content="Details">
-            <Detailperumahan items={perumahan} />
+            <DetailPerumahan items={perumahan} />
           </Tooltip>
           <Tooltip content="Edit perumahan" color="secondary">
             <Editperumahan items={perumahan} />
           </Tooltip>
           <Tooltip content="Delete perumahan" color="secondary">
-            <button
-              onClick={() =>
-                console.log("Delete perumahan", perumahan.id_perumahan)
-              }
-            >
-              <DeleteIcon size={20} fill="#FF0080" />
-            </button>
+            <DeletePerumahan items={perumahan} />
           </Tooltip>
         </div>
       );

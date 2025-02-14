@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { EyeIcon } from "../icons/table/eye-icon";
 
-export const Detailperumahan = ({
+export const DetailPerumahan = ({
   items,
 }: {
   items: DetailPerumahanType;

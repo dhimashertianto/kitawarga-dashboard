@@ -67,7 +67,7 @@ export const Editperumahan = ({
       onClose();
       window.location.reload();
     } catch (error) {
-      setIsEditErrorMessage(error.response?.data?.message);
+      setIsEditErrorMessage("Failed Change a Data");
       setIsEditError(true);
     } finally {
       setTimeout(() => {
@@ -101,7 +101,7 @@ export const Editperumahan = ({
       >
         <ModalContent>
           {isEditError && (
-            <ErrorAlert title={isEditErrorrMessage} color="success" />
+            <ErrorAlert title={isEditErrorrMessage} color="danger" />
           )}
           <ModalHeader className="flex flex-col gap-1">
             Perumahan Details
