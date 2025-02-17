@@ -34,3 +34,15 @@ export type DetailPerumahanType = {
   expired_sub: string | null;
   skema_bayar: string;
 };
+
+export type ListPemasukanType = {
+  id_transaksi: string;
+  id_warga: string;
+  nama_pembayar: string;
+  nomor_rumah: string;
+  tanggal_transaksi: string;
+  nilai_transaksi: string;
+  createdAt: string;
+  updatedAt: string;
+  bulan: string;
+};

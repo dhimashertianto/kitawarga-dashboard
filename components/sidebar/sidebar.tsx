@@ -24,6 +24,21 @@ export const SidebarWrapper = () => {
   const pathname = usePathname();
   const { collapsed, setCollapsed } = useSidebarContext();
 
+  const arrPengeluaran = [
+    {
+      title: "Paycheck",
+      pathName: "/spendings/paycheck",
+    },
+    {
+      title: "Loan",
+      pathName: "/spendings/kasbon",
+    },
+    {
+      title: "Others",
+      pathName: "/spendings/lain-lain",
+    },
+  ];
+
   return (
     <aside className="h-screen z-[20] sticky top-0">
       {collapsed ? (
@@ -53,14 +68,15 @@ export const SidebarWrapper = () => {
                 href="accounts"
               />
               <SidebarItem
-                isActive={pathname === "/payments"}
-                title="Payments"
+                isActive={pathname === "/revenue"}
+                title="Revenue"
                 icon={<PaymentsIcon />}
+                href="revenue"
               />
               <CollapseItems
                 icon={<BalanceIcon />}
-                items={["Banks Accounts", "Credit Cards", "Loans"]}
-                title="Balances"
+                items={arrPengeluaran}
+                title="Expenses"
               />
               <SidebarItem
                 isActive={pathname === "/customers"}

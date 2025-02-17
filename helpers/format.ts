@@ -11,3 +11,12 @@ export const formatCurrency = (amount: number | null | undefined): string => {
   });
   return `Rp ${formattedAmount}`;
 };
+
+export const convertTimestampToDate = (timestamp: number): string => {
+  const date = new Date(timestamp * 1000); // convert to milliseconds
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+};

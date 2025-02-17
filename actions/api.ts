@@ -41,7 +41,7 @@ export const getData = async (endpoint: string) => {
 
 export const fetchData = async <T>(
   endpoint: string,
-  payload: Object
+  payload?: Object
 ): Promise<T> => {
   const token = Cookies.get("token");
 
@@ -52,7 +52,7 @@ export const fetchData = async <T>(
   try {
     const { status, data } = await axios.post(
       `${BASE_URL}${endpoint}`,
-      payload,
+      payload || {},
       { headers: { "x-access-token": token } }
     );
 
