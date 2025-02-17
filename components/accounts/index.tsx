@@ -2,16 +2,14 @@
 "use client";
 import { getData } from "@/actions/api";
 import { TableWrapper } from "@/components/accounts/table/table"; // Import the table component
-import { DotsIcon } from "@/components/icons/accounts/dots-icon";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
-import { InfoIcon } from "@/components/icons/accounts/info-icon";
-import { TrashIcon } from "@/components/icons/accounts/trash-icon";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
-import { SettingsIcon } from "@/components/icons/sidebar/settings-icon";
 import { Listperumahan } from "@/constants/constants";
+import { DetailPerumahanType } from "@/helpers/types";
 import { Alert } from "@heroui/react";
 import { Button, Input } from "@nextui-org/react";
+import debounce from "lodash.debounce";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -20,7 +18,10 @@ import { AddUser } from "./add-user";
 export const Accounts = () => {
   const router = useRouter();
 
-  const [perumahan, setPerumahan] = useState([]);
+  const [perumahan, setPerumahan] = useState<DetailPerumahanType[]>([]);
+  const [filteredPerumahan, setFilteredPerumahan] = useState<
+    DetailPerumahanType[]
+  >([]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -32,6 +33,7 @@ export const Accounts = () => {
     try {
       const response = await getData(Listperumahan);
       setPerumahan(response.data);
+      setFilteredPerumahan(response.data);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setIsError(true);
@@ -47,6 +49,23 @@ export const Accounts = () => {
       }, 2500);
     }
   };
+
+  const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value.toLowerCase();
+    const filteredPerumahan = perumahan.reduce(
+      (result: DetailPerumahanType[], perumahan) => {
+        if (
+          perumahan.nama_perumahan.toLowerCase().includes(searchValue) ||
+          perumahan.alamat_perumahan.toLowerCase().includes(searchValue)
+        ) {
+          result.push(perumahan);
+        }
+        return result;
+      },
+      []
+    );
+    setFilteredPerumahan(filteredPerumahan);
+  }, 1000);
 
   const renderError = (title: string) => {
     return (
@@ -74,11 +93,8 @@ export const Accounts = () => {
 
         <li className="flex gap-2">
           <UsersIcon />
-          <span>Users</span>
+          <span>Accounts</span>
           <span> / </span>{" "}
-        </li>
-        <li className="flex gap-2">
-          <span>List</span>
         </li>
       </ul>
 
@@ -90,22 +106,19 @@ export const Accounts = () => {
               input: "w-full",
               mainWrapper: "w-full",
             }}
+            onChange={handleSearch}
             placeholder="Search users"
           />
-          <SettingsIcon />
-          <TrashIcon />
-          <InfoIcon />
-          <DotsIcon />
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddUser />
-          <Button color="primary" startContent={<ExportIcon />}>
+          {/* <Button color="primary" startContent={<ExportIcon />}>
             Export to CSV
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">
-        <TableWrapper items={perumahan} />
+        <TableWrapper items={filteredPerumahan} />
       </div>
     </div>
   );
