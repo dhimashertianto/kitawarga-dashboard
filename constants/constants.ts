@@ -13,6 +13,8 @@ const EditPerumahan = "/api/admin/update/perumahan";
 const DeletePerumahan = "/api/admin/delete/perumahan";
 const ListPemasukan = "/api/admin/list/pemasukan";
 
+const ListGajiKaryawan = "/api/admin/list/pengeluaran_gaji_new"
+
 export {
   BASE_URL,
   Login,
@@ -24,4 +26,5 @@ export {
   EditPerumahan,
   DeletePerumahan,
   ListPemasukan,
+  ListGajiKaryawan,
 };

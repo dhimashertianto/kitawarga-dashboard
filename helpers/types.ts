@@ -46,3 +46,23 @@ export type ListPemasukanType = {
   updatedAt: string;
   bulan: string;
 };
+
+export type ListGajiKaryawanType = {
+  id_gaji:       string;
+  id_karyawan:   string;
+  nama_karyawan: string;
+  posisi:        string;
+  gaji_bulanan:  string;
+  bulan:         string;
+  data:          lisGajiKaryawanDataType[];
+}
+
+export type lisGajiKaryawanDataType = {
+  posisi:        string;
+  gaji_bulanan:  string;
+  id_karyawan:   string;
+  nama_karyawan: string;
+  jumlah_gaji:   string;
+  tanggal_gaji:  string;
+  id_gaji:       string;
+}

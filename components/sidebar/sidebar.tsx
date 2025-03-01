@@ -73,7 +73,7 @@ export const SidebarWrapper = () => {
                 icon={<PaymentsIcon />}
                 href="revenue"
               />
-              <CollapseItems
+              {/* <CollapseItems
                 icon={<BalanceIcon />}
                 items={arrPengeluaran}
                 title="Expenses"
@@ -92,6 +92,27 @@ export const SidebarWrapper = () => {
                 isActive={pathname === "/reports"}
                 title="Reports"
                 icon={<ReportsIcon />}
+              /> */}
+            </SidebarMenu>
+
+            <SidebarMenu title="Expenses">
+              <SidebarItem
+                isActive={pathname === "/paycheck"}
+                title="Paychecks"
+                icon={<BalanceIcon />}
+                href="/paycheck"
+              />
+              <SidebarItem
+                isActive={pathname === "/loan"}
+                title="Loans"
+                icon={<PaymentsIcon />}
+                href="/loan"
+              />
+              <SidebarItem
+                isActive={pathname === "/other"}
+                title="Others"
+                icon={<DevIcon />}
+                href="/other"
               />
             </SidebarMenu>
 

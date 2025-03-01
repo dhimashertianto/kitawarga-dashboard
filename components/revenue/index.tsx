@@ -15,13 +15,6 @@ import { useEffect, useState } from "react";
 import { TableWrapper } from "./table/table";
 
 export const Revenue = () => {
-  const router = useRouter();
-
-  const [perumahan, setPerumahan] = useState<DetailPerumahanType[]>([]);
-  const [filteredPerumahan, setFilteredPerumahan] = useState<
-    DetailPerumahanType[]
-  >([]);
-
   const [pemasukan, setPemasukan] = useState<ListPemasukanType[]>([]);
   const [filteredPemasukan, setFilteredPemasukan] = useState<
     ListPemasukanType[]
@@ -30,7 +23,6 @@ export const Revenue = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    getPerumahan();
     getPemasukan();
   }, []);
 
@@ -41,27 +33,6 @@ export const Revenue = () => {
       );
       setPemasukan(response.data);
       setFilteredPemasukan(response.data);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setIsError(true);
-        setErrorMessage(error.message);
-      } else {
-        setIsError(true);
-        setErrorMessage("An unknown error occurred");
-      }
-    } finally {
-      setTimeout(() => {
-        setIsError(false);
-        setErrorMessage("");
-      }, 2500);
-    }
-  };
-
-  const getPerumahan = async () => {
-    try {
-      const response = await getData(Listperumahan);
-      setPerumahan(response.data);
-      setFilteredPerumahan(response.data);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setIsError(true);
