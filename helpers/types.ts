@@ -48,21 +48,47 @@ export type ListPemasukanType = {
 };
 
 export type ListGajiKaryawanType = {
-  id_gaji:       string;
-  id_karyawan:   string;
+  id_gaji: string;
+  id_karyawan: string;
   nama_karyawan: string;
-  posisi:        string;
-  gaji_bulanan:  string;
-  bulan:         string;
-  data:          lisGajiKaryawanDataType[];
-}
+  posisi: string;
+  gaji_bulanan: string;
+  bulan: string;
+  data: lisGajiKaryawanDataType[];
+};
 
 export type lisGajiKaryawanDataType = {
-  posisi:        string;
-  gaji_bulanan:  string;
-  id_karyawan:   string;
+  posisi: string;
+  gaji_bulanan: string;
+  id_karyawan: string;
   nama_karyawan: string;
-  jumlah_gaji:   string;
-  tanggal_gaji:  string;
-  id_gaji:       string;
-}
+  jumlah_gaji: string;
+  tanggal_gaji: string;
+  id_gaji: string;
+};
+
+export type ListKasbonType = {
+  id_kasbon: string;
+  id_karyawan: string;
+  nama_karyawan: string;
+  bulan: string;
+  data: ListKasbonDataType[];
+};
+
+export type ListKasbonDataType = {
+  id_kasbon: string;
+  tanggal_transaksi: string;
+  nama_karyawan: string;
+  id_karyawan: string;
+  detail_transaksi: string;
+  pinjaman: string;
+  tenor: string;
+  angsuran_per_bulan: string;
+  keterangan: string;
+  createdAt: Date;
+  updatedAt: Date;
+  posisi: string;
+  sisa_kasbon: string;
+  id_perumahan: string;
+  gaji_bulanan: string;
+};

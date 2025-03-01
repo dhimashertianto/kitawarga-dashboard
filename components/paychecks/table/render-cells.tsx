@@ -48,6 +48,10 @@ export const RenderCell = ({
       );
 
     default:
-      return <span>{cellValue}</span>;
+      return (
+        <span>
+          {Array.isArray(cellValue) ? JSON.stringify(cellValue) : cellValue}
+        </span>
+      );
   }
 };
