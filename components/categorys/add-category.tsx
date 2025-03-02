@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 export const AddCategory = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -22,9 +23,10 @@ export const AddCategory = () => {
 
   const handleAddCategory = async () => {
     setLoading(true);
+    const id = uuidv4();
     try {
       await fetchData(AddKategori, {
-        id_kategori: "id",
+        id_kategori: id,
         nama_kategori_transaksi: categoryName,
         keterangan_kategori_transaksi: categoryNote,
       });

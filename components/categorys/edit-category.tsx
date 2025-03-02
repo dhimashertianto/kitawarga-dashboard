@@ -1,5 +1,5 @@
 import { fetchData } from "@/actions/api";
-import { EditPerumahan } from "@/constants/constants";
+import { EditKategori, EditPerumahan } from "@/constants/constants";
 import { ListCategoryType } from "@/helpers/types";
 import { Spinner } from "@heroui/react";
 import {
@@ -53,9 +53,9 @@ export const EditCategory = ({
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
+    setLoading(true);    
     try {
-      await fetchData(EditPerumahan, {
+      await fetchData(EditKategori, {
         id_kategori: categoryDetails?.id_kategori,
         nama_kategori_transaksi: namaCategory,
         keterangan_kategori_transaksi: keteranganCategory,
@@ -67,7 +67,7 @@ export const EditCategory = ({
     } catch (error) {
       setIsEditErrorMessage("Failed Change a Data");
       setIsEditError(true);
-    } finally {
+    } finally {      
       setTimeout(() => {
         setIsEditErrorMessage("");
         setIsEditError(false);

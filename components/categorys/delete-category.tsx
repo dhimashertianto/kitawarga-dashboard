@@ -1,5 +1,5 @@
 import { fetchData } from "@/actions/api";
-import { DeletePerumahan as DeletePerumahanAPI } from "@/constants/constants";
+import { DeleteKategori, DeletePerumahan as DeletePerumahanAPI } from "@/constants/constants";
 import { ListCategoryType } from "@/helpers/types";
 import { Spinner } from "@heroui/react";
 import {
@@ -36,7 +36,7 @@ export const DeleteCategory = ({
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      await fetchData(DeletePerumahanAPI, {
+      await fetchData(DeleteKategori, {
         id_kategori: categoryDetails?.id_kategori,
       });
       setIsEditErrorMessage("success");
