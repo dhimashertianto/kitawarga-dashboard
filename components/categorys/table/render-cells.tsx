@@ -1,14 +1,10 @@
 // components/accounts/table/render-cells.tsx
+import { formatDate } from "@/helpers/format";
+import { ListCategoryType } from "@/helpers/types";
 import { Tooltip } from "@nextui-org/react";
-import { DeleteIcon } from "../../icons/table/delete-icon";
-import { EditIcon } from "../../icons/table/edit-icon";
-import { EyeIcon } from "../../icons/table/eye-icon";
-import { DetailPerumahanType, ListCategoryType } from "@/helpers/types";
-import { formatCurrency } from "@/helpers/format";
-import { convertTimestampToDate } from "@/helpers/format";
-import { EditCategory } from "../edit-category";
-import { DetailCategory } from "../detail-category";
 import { DeleteCategory } from "../delete-category";
+import { DetailCategory } from "../detail-category";
+import { EditCategory } from "../edit-category";
 
 /**
  * Renders a cell in the table, taking into account the column key and the data type.
@@ -45,7 +41,13 @@ export const RenderCell = ({
     case "createdAt":
       return (
         <div>
-          <span>{convertTimestampToDate(parseInt(category.createdAt))}</span>
+          <span>{formatDate(category.createdAt)}</span>
+        </div>
+      );
+    case "updatedAt":
+      return (
+        <div>
+          <span>{formatDate(category.updatedAt)}</span>
         </div>
       );
     case "actions":

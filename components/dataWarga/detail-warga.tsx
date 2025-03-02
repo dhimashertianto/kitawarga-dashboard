@@ -1,4 +1,4 @@
-import { DetailPerumahanType } from "@/helpers/types";
+import { ListWargaType } from "@/helpers/types";
 import {
   Button,
   Input,
@@ -12,17 +12,17 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { EyeIcon } from "../icons/table/eye-icon";
-export const DetailPerumahan = ({
+import { formatCurrency } from "@/helpers/format";
+export const DetailWargas = ({
   items,
 }: {
-  items: DetailPerumahanType;
+  items: ListWargaType;
 }): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [perumahanDetails, setPerumahanDetails] =
-    useState<DetailPerumahanType | null>(null);
+  const [wargaDetails, setWargaDetails] = useState<ListWargaType | null>(null);
 
   const handleViewDetails = () => {
-    setPerumahanDetails(items);
+    setWargaDetails(items);
     onOpen();
   };
 
@@ -49,48 +49,77 @@ export const DetailPerumahan = ({
       >
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">
-            Perumahan Details
+            Warga Details
           </ModalHeader>
           <ModalBody>
-            {perumahanDetails ? (
+            {wargaDetails ? (
               <div className="grid grid-cols-2 gap-4">
                 <Input
                   label="ID"
                   className="max-w-xs"
-                  value={perumahanDetails.id_perumahan}
+                  value={wargaDetails.id_warga}
                   variant="flat"
                   readOnly
                 />
                 <Input
-                  label="Nama Perumahan"
-                  value={perumahanDetails.nama_perumahan}
+                  label="Nama Warga"
+                  value={wargaDetails.nama_warga}
                   variant="flat"
                   readOnly
                 />
                 <Input
-                  label="Alamat Perumahan"
-                  value={perumahanDetails.alamat_perumahan}
+                  label="Nomor Rumah"
+                  value={wargaDetails.nomor_rumah}
                   variant="flat"
                   readOnly
                 />
                 <Input
-                  label="Saldo"
-                  value={perumahanDetails.saldo_perumahan}
+                  label="Blok Rumah"
+                  value={wargaDetails.blok_rumah}
                   variant="flat"
                   readOnly
                 />
                 <Input
-                  label="Type"
-                  value={
-                    perumahanDetails.status_account === "1"
-                      ? "Subscribed"
-                      : "Regular"
-                  }
+                  label="Nomor HP"
+                  value={wargaDetails.nomor_hp}
+                  variant="flat"
+                  readOnly
+                />
+                <Input
+                  label="Jenis Kelamin"
+                  value={wargaDetails.jenis_kelamin}
+                  variant="flat"
+                  readOnly
+                />
+                <Input
+                  label="Alamat"
+                  value={wargaDetails.alamat_perumahan}
+                  variant="flat"
+                  readOnly
+                />
+
+                <Input
+                  label="IPL"
+                  value={formatCurrency(parseInt(wargaDetails.biaya_ipl))}
+                  variant="flat"
+                  readOnly
+                />
+                <Input
+                  label="Fee"
+                  value={formatCurrency(
+                    parseInt(wargaDetails.biaya_penambahan)
+                  )}
                   variant="flat"
                   readOnly
                 />
                 <Input
                   label="Created At"
+                  value={formattedDate}
+                  variant="flat"
+                  readOnly
+                />
+                <Input
+                  label="Updated At"
                   value={formattedDate}
                   variant="flat"
                   readOnly

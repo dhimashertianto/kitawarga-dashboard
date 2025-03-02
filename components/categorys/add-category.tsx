@@ -11,7 +11,8 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { ErrorAlert } from "../alert/alert";
 
 export const AddCategory = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
@@ -56,10 +57,12 @@ export const AddCategory = () => {
           isOpen={isOpen}
           onOpenChange={onOpenChange}
           placement="top-center"
+          size="2xl"
         >
           <ModalContent>
             {(onClose) => (
               <>
+                {isError && <ErrorAlert title={errorMessage} color="danger" />}
                 <ModalHeader className="flex flex-col gap-1">
                   Add Category
                 </ModalHeader>

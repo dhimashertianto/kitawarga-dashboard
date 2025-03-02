@@ -65,10 +65,10 @@ export const SidebarWrapper = () => {
             </SidebarMenu>
             <SidebarMenu title="Data">
               <SidebarItem
-                isActive={pathname === "/warga"}
+                isActive={pathname === "/data-warga"}
                 title="Data Warga"
                 icon={<Person2Icon />}
-                href="warga"
+                href="data-warga"
               />
               <SidebarItem
                 isActive={pathname === "/karyawan"}

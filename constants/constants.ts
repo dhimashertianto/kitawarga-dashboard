@@ -16,10 +16,16 @@ const ListPemasukan = "/api/admin/list/pemasukan";
 const ListGajiKaryawan = "/api/admin/list/pengeluaran_gaji_new";
 const ListKasbonKaryawan = "/api/admin/list/pengeluaran_kasbon_new";
 const ListOtherKaryawan = "/api/admin/list/pengeluaran_webview_new";
+
 const ListKategori = "/api/admin/list/kategori";
 const AddKategori = "/api/admin/insert/kategori";
 const EditKategori = "/api/admin/update/kategori";
 const DeleteKategori = "/api/admin/delete/kategori";
+
+const ListWarga = "/api/admin/list/warga";
+const AddWarga = "/api/admin/insert/warga";
+const EditWarga = "/api/admin/update/warga";
+const DeleteWarga = "/api/admin/delete/warga";
 
 export {
   BASE_URL,
@@ -39,4 +45,8 @@ export {
   AddKategori,
   EditKategori,
   DeleteKategori,
+  ListWarga,
+  AddWarga,
+  EditWarga,
+  DeleteWarga,
 };

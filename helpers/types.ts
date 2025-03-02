@@ -135,3 +135,37 @@ export type ListCategoryType = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type ListWargaType = {
+  id_warga: string;
+  nama_warga: string;
+  blok_rumah: string;
+  nomor_rumah: string;
+  email: string;
+  nomor_hp: string;
+  is_rw: boolean;
+  is_rt: boolean;
+  id_rw: string;
+  id_rt: string;
+  id_perumahan: string;
+  status_pernikahan: string;
+  jenis_kelamin: string;
+  biaya_ipl: string;
+  createdAt: string;
+  updatedAt: string;
+  password_warga: string;
+  fcm_token: string;
+  biaya_penambahan: string;
+  nama_perumahan: string;
+  alamat_perumahan: string;
+  link_cctv: string;
+  link_img_qr: string;
+  saldo_perumahan: string;
+  alamat_maps: string;
+  bank_code: string;
+  account_holder_name: string;
+  account_number: string;
+  status_account: string;
+  expired_sub?: string;
+  skema_bayar: string;
+};

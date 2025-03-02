@@ -8,10 +8,13 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
+import { ErrorAlert } from "../alert/alert";
 
 export const AddUser = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isEditError, setIsEditError] = useState(false);
+  const [isEditErrorrMessage, setIsEditErrorMessage] = useState("");
 
   return (
     <div>
@@ -23,10 +26,14 @@ export const AddUser = () => {
           isOpen={isOpen}
           onOpenChange={onOpenChange}
           placement="top-center"
+          size="2xl"
         >
           <ModalContent>
             {(onClose) => (
               <>
+                {isEditError && (
+                  <ErrorAlert title={isEditErrorrMessage} color="danger" />
+                )}
                 <ModalHeader className="flex flex-col gap-1">
                   Add User
                 </ModalHeader>

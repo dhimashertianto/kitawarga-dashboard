@@ -44,10 +44,13 @@ export const Loans = () => {
         setKasbon(typedResponse.data);
         setFilteredKasbon(typedResponse.data);
       } catch (error: unknown) {
-        setIsError(true);
-        setErrorMessage(
-          error instanceof Error ? error.message : "An unknown error occurred"
-        );
+        if (error instanceof Error) {
+          setIsError(true);
+          setErrorMessage(error.message);
+        } else {
+          setIsError(true);
+          setErrorMessage("An unknown error occurred");
+        }
       } finally {
         setTimeout(() => {
           setIsError(false);
