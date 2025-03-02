@@ -15,6 +15,11 @@ const ListPemasukan = "/api/admin/list/pemasukan";
 
 const ListGajiKaryawan = "/api/admin/list/pengeluaran_gaji_new";
 const ListKasbonKaryawan = "/api/admin/list/pengeluaran_kasbon_new";
+const ListOtherKaryawan = "/api/admin/list/pengeluaran_webview_new";
+const ListKategori = "/api/admin/list/kategori";
+const AddKategori = "/api/admin/insert/kategori";
+const EditKategori = "/api/admin/update/kategori";
+const DeleteKategori = "/api/admin/delete/kategori";
 
 export {
   BASE_URL,
@@ -29,4 +34,9 @@ export {
   ListPemasukan,
   ListGajiKaryawan,
   ListKasbonKaryawan,
+  ListOtherKaryawan,
+  ListKategori,
+  AddKategori,
+  EditKategori,
+  DeleteKategori,
 };

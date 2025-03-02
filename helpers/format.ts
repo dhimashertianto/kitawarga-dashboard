@@ -13,7 +13,10 @@ export const formatCurrency = (amount: number | null | undefined): string => {
 };
 
 export const convertTimestampToDate = (timestamp: number): string => {
-  const date = new Date(timestamp * 1000); // convert to milliseconds
+  // Check if timestamp is in milliseconds (13 digits) or seconds (10 digits)
+  const date = new Date(
+    timestamp.toString().length > 10 ? timestamp : timestamp * 1000
+  );
   return new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "short",

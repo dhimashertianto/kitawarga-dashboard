@@ -1,6 +1,6 @@
 // components/accounts/table/render-cells.tsx
 import { formatCurrency } from "@/helpers/format";
-import { ListKasbonDataType, ListKasbonType } from "@/helpers/types";
+import { ListKasbonType } from "@/helpers/types";
 
 /**
  * Renders a cell in the table, taking into account the column key and the data type.

@@ -19,6 +19,10 @@ import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
 import { usePathname } from "next/navigation";
+import { VerticalDotsIcon } from "../icons/sidebar/three-dots-vertical";
+import { Person2Icon } from "../icons/sidebar/person2";
+import { EmployeeCardIcon } from "../icons/sidebar/employee-card-icon";
+import { CategoryListIcon } from "../icons/sidebar/category-list-icon";
 
 export const SidebarWrapper = () => {
   const pathname = usePathname();
@@ -45,85 +49,72 @@ export const SidebarWrapper = () => {
               isActive={pathname === "/"}
               href="/"
             />
-            <SidebarMenu title="Main Menu">
+            <SidebarMenu title="Admin">
               <SidebarItem
                 isActive={pathname === "/accounts"}
-                title="Accounts"
+                title="Perumahan"
                 icon={<AccountsIcon />}
                 href="accounts"
               />
               <SidebarItem
+                isActive={pathname === "/category"}
+                title="Kategori Transaksi"
+                icon={<CategoryListIcon />}
+                href="category"
+              />
+            </SidebarMenu>
+            <SidebarMenu title="Data">
+              <SidebarItem
+                isActive={pathname === "/warga"}
+                title="Data Warga"
+                icon={<Person2Icon />}
+                href="warga"
+              />
+              <SidebarItem
+                isActive={pathname === "/karyawan"}
+                title="Data Karyawan"
+                icon={<EmployeeCardIcon />}
+                href="karyawan"
+              />
+              <SidebarItem
+                isActive={pathname === "/rt"}
+                title="Data RT"
+                icon={<ViewIcon />}
+                href="rt"
+              />
+              <SidebarItem
+                isActive={pathname === "/rw"}
+                title="Data RW"
+                icon={<ViewIcon />}
+                href="rw"
+              />
+            </SidebarMenu>
+            <SidebarMenu title="Pemasukan">
+              <SidebarItem
                 isActive={pathname === "/revenue"}
-                title="Revenue"
+                title="Kas Masuk"
                 icon={<PaymentsIcon />}
                 href="revenue"
               />
-              {/* <CollapseItems
-                icon={<BalanceIcon />}
-                items={arrPengeluaran}
-                title="Expenses"
-              />
-              <SidebarItem
-                isActive={pathname === "/customers"}
-                title="Customers"
-                icon={<CustomersIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/products"}
-                title="Products"
-                icon={<ProductsIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/reports"}
-                title="Reports"
-                icon={<ReportsIcon />}
-              /> */}
             </SidebarMenu>
-
-            <SidebarMenu title="Expenses">
+            <SidebarMenu title="Pengeluaran">
               <SidebarItem
                 isActive={pathname === "/paycheck"}
-                title="Paychecks"
+                title="Gaji"
                 icon={<BalanceIcon />}
                 href="/paycheck"
               />
               <SidebarItem
                 isActive={pathname === "/loans"}
-                title="Loans"
+                title="Kas Bon"
                 icon={<PaymentsIcon />}
                 href="/loans"
               />
               <SidebarItem
-                isActive={pathname === "/other"}
-                title="Others"
-                icon={<DevIcon />}
-                href="/other"
-              />
-            </SidebarMenu>
-
-            <SidebarMenu title="General">
-              <SidebarItem
-                isActive={pathname === "/developers"}
-                title="Developers"
-                icon={<DevIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/view"}
-                title="View Test Data"
-                icon={<ViewIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/settings"}
-                title="Settings"
-                icon={<SettingsIcon />}
-              />
-            </SidebarMenu>
-
-            <SidebarMenu title="Updates">
-              <SidebarItem
-                isActive={pathname === "/changelog"}
-                title="Changelog"
-                icon={<ChangeLogIcon />}
+                isActive={pathname === "/others"}
+                title="Lain - Lain"
+                icon={<VerticalDotsIcon />}
+                href="/others"
               />
             </SidebarMenu>
           </div>

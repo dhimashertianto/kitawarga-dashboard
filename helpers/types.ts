@@ -92,3 +92,46 @@ export type ListKasbonDataType = {
   id_perumahan: string;
   gaji_bulanan: string;
 };
+
+export type ListOtherType = {
+  id_perumahan: string;
+  nama_perumahan: string;
+  bulan: string;
+  data: ListOtherTypeData[];
+};
+
+export type ListOtherTypeData = {
+  id_pengeluaran_bulanan: string;
+  nama_transaksi_pengeluaran_bulanan: string;
+  id_kategori: string;
+  kategori_transaksi: string;
+  tanggal_transaksi_pengeluaran_bulanan: string;
+  nilai_transaksi_pengeluaran_bulanan: string;
+  keterangan_pengeluaran_bulanan: string;
+  bukti_foto_pengeluaran_bulanan: string;
+  id_perumahan: string;
+  createdAt: string;
+  updatedAt: string;
+  nama_kategori_transaksi: string;
+  keterangan_kategori_transaksi: string;
+  nama_perumahan: string;
+  alamat_perumahan: string;
+  link_cctv: string;
+  link_img_qr: string;
+  saldo_perumahan: string;
+  alamat_maps: string;
+  bank_code: string;
+  account_holder_name: string;
+  account_number: string;
+  status_account: string;
+  expired_sub: string;
+  skema_bayar: string;
+};
+
+export type ListCategoryType = {
+  id_kategori: string;
+  nama_kategori_transaksi: string;
+  keterangan_kategori_transaksi: string;
+  createdAt: string;
+  updatedAt: string;
+};
