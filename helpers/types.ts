@@ -180,3 +180,21 @@ export type DataKaryawanType = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type DataRwType = {
+  id_rw: string;
+  nomor_rw: string;
+  id_perumahan: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DataRtType = {
+  id_rt: string;
+  id_rw: string;
+  nomor_rt: string;
+  id_perumahan: string;
+  createdAt: string;
+  updatedAt: string;
+  nomor_rw: string;
+};

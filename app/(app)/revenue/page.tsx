@@ -1,5 +1,5 @@
 import React from "react";
-import { Revenue } from "@/components/revenue";
+import { Revenue } from "@/components/pages/revenue";
 
 /**
  * Reveue component.

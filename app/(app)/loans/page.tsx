@@ -1,4 +1,4 @@
-import { Loans } from "@/components/loans";
+import { Loans } from "@/components/pages/loans";
 
 const loans = () => {
   return <Loans />;

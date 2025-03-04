@@ -1,4 +1,4 @@
-import { Paychecks } from "@/components/paychecks";
+import { Paychecks } from "@/components/pages/paychecks";
 
 const paychecks = () => {
   return <Paychecks />;

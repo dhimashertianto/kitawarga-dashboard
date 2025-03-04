@@ -1,28 +1,20 @@
-import React from "react";
-import { Sidebar } from "./sidebar.styles";
 import { Avatar, Tooltip } from "@nextui-org/react";
-import { CompaniesDropdown } from "./companies-dropdown";
+import { usePathname } from "next/navigation";
+import { AccountsIcon } from "../icons/sidebar/accounts-icon";
+import { BalanceIcon } from "../icons/sidebar/balance-icon";
+import { CategoryListIcon } from "../icons/sidebar/category-list-icon";
+import { EmployeeCardIcon } from "../icons/sidebar/employee-card-icon";
+import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { HomeIcon } from "../icons/sidebar/home-icon";
 import { PaymentsIcon } from "../icons/sidebar/payments-icon";
-import { BalanceIcon } from "../icons/sidebar/balance-icon";
-import { AccountsIcon } from "../icons/sidebar/accounts-icon";
-import { CustomersIcon } from "../icons/sidebar/customers-icon";
-import { ProductsIcon } from "../icons/sidebar/products-icon";
-import { ReportsIcon } from "../icons/sidebar/reports-icon";
-import { DevIcon } from "../icons/sidebar/dev-icon";
-import { ViewIcon } from "../icons/sidebar/view-icon";
+import { Person2Icon } from "../icons/sidebar/person2";
 import { SettingsIcon } from "../icons/sidebar/settings-icon";
-import { CollapseItems } from "./collapse-items";
+import { VerticalDotsIcon } from "../icons/sidebar/three-dots-vertical";
+import { ViewIcon } from "../icons/sidebar/view-icon";
+import { useSidebarContext } from "../layout/layout-context";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarMenu } from "./sidebar-menu";
-import { FilterIcon } from "../icons/sidebar/filter-icon";
-import { useSidebarContext } from "../layout/layout-context";
-import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
-import { usePathname } from "next/navigation";
-import { VerticalDotsIcon } from "../icons/sidebar/three-dots-vertical";
-import { Person2Icon } from "../icons/sidebar/person2";
-import { EmployeeCardIcon } from "../icons/sidebar/employee-card-icon";
-import { CategoryListIcon } from "../icons/sidebar/category-list-icon";
+import { Sidebar } from "./sidebar.styles";
 
 export const SidebarWrapper = () => {
   const pathname = usePathname();
@@ -39,7 +31,8 @@ export const SidebarWrapper = () => {
         })}
       >
         <div className={Sidebar.Header()}>
-          <CompaniesDropdown />
+          <div className="flex items-center justify-between">KITA WARGA</div>
+          {/* <CompaniesDropdown /> */}
         </div>
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
@@ -62,6 +55,18 @@ export const SidebarWrapper = () => {
                 icon={<CategoryListIcon />}
                 href="category"
               />
+              <SidebarItem
+                isActive={pathname === "/rt"}
+                title="RT"
+                icon={<ViewIcon />}
+                href="rt"
+              />
+              <SidebarItem
+                isActive={pathname === "/rw"}
+                title="RW"
+                icon={<ViewIcon />}
+                href="rw"
+              />
             </SidebarMenu>
             <SidebarMenu title="Data">
               <SidebarItem
@@ -75,18 +80,6 @@ export const SidebarWrapper = () => {
                 title="Data Karyawan"
                 icon={<EmployeeCardIcon />}
                 href="data-karyawan"
-              />
-              <SidebarItem
-                isActive={pathname === "/rt"}
-                title="Data RT"
-                icon={<ViewIcon />}
-                href="rt"
-              />
-              <SidebarItem
-                isActive={pathname === "/rw"}
-                title="Data RW"
-                icon={<ViewIcon />}
-                href="rw"
               />
             </SidebarMenu>
             <SidebarMenu title="Pemasukan">

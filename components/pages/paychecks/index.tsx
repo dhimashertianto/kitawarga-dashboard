@@ -4,8 +4,8 @@ import { fetchData } from "@/actions/api";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
-import { ListOtherKaryawan } from "@/constants/constants";
-import { ListOtherType } from "@/helpers/types";
+import { ListGajiKaryawan } from "@/constants/constants";
+import { ListGajiKaryawanType } from "@/helpers/types";
 import {
   Dropdown,
   DropdownItem,
@@ -17,13 +17,16 @@ import { Button, Input } from "@nextui-org/react";
 import Cookies from "js-cookie";
 import debounce from "lodash.debounce";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { TableWrapper } from "./table/table";
+import { TableWrapper } from "@/components/pages/paychecks/table/table";
 import { ChevronDownIcon } from "@/components/icons/sidebar/chevron-down-icon";
 
-export const Others = () => {
-  const [others, setOthers] = useState<ListOtherType[]>([]);
-  const [filteredOthers, setFilteredOthers] = useState<ListOtherType[]>([]);
+export const Paychecks = () => {
+  const router = useRouter();
+
+  const [gaji, setGaji] = useState<ListGajiKaryawanType[]>([]);
+  const [filteredGaji, setFilteredGaji] = useState<ListGajiKaryawanType[]>([]);
   const [selectedYear, setSelectedYear] = useState(
     new Date().getFullYear().toString()
   );
@@ -31,15 +34,15 @@ export const Others = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    const getOthers = async () => {
+    const getPerumahan = async () => {
       try {
-        const response = await fetchData(ListOtherKaryawan, {
+        const response = await fetchData(ListGajiKaryawan, {
           id_perumahan: Cookies.get("id_perumahan"),
           tahun: selectedYear,
         });
-        const typedResponse = response as { data: ListOtherType[] };
-        setOthers(typedResponse.data);
-        setFilteredOthers(typedResponse.data);
+        const typedResponse = response as { data: ListGajiKaryawanType[] };
+        setGaji(typedResponse.data);
+        setFilteredGaji(typedResponse.data);
       } catch (error: unknown) {
         if (error instanceof Error) {
           setIsError(true);
@@ -56,7 +59,7 @@ export const Others = () => {
       }
     };
 
-    getOthers();
+    getPerumahan();
   }, [selectedYear]);
 
   const generateYearOptions = () => {
@@ -70,19 +73,13 @@ export const Others = () => {
 
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
-    const filteredOthers = others.reduce((result: ListOtherType[], other) => {
-      if (
-        other.data
-          .map((item) => item.nama_transaksi_pengeluaran_bulanan)
-          .join(", ")
-          .toLowerCase()
-          .includes(searchValue)
-      ) {
-        result.push(other);
+    const filteredGaji = gaji.reduce((result: ListGajiKaryawanType[], gaji) => {
+      if (gaji.nama_karyawan.toLowerCase().includes(searchValue)) {
+        result.push(gaji);
       }
       return result;
     }, []);
-    setFilteredOthers(filteredOthers);
+    setFilteredGaji(filteredGaji);
   }, 1000);
 
   const renderError = (title: string) => {
@@ -111,12 +108,12 @@ export const Others = () => {
 
         <li className="flex gap-2">
           <UsersIcon />
-          <span>Pengeluaran Lainnya</span>
+          <span>Gaji</span>
           <span> / </span>{" "}
         </li>
       </ul>
 
-      <h3 className="text-xl font-semibold">All Pengeluaran Lainnya</h3>
+      <h3 className="text-xl font-semibold">All Gaji</h3>
       <div className="flex justify-between flex-wrap gap-4 items-center">
         <div className="flex items-center gap-3 flex-wrap md:flex-nowrap">
           <Input
@@ -157,7 +154,7 @@ export const Others = () => {
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">
-        <TableWrapper items={filteredOthers} />
+        <TableWrapper items={filteredGaji} />
       </div>
     </div>
   );

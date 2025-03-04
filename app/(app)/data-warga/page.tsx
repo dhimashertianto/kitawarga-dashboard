@@ -1,4 +1,4 @@
-import { DataWargas } from "@/components/dataWarga";
+import { DataWargas } from "@/components/pages/dataWarga";
 
 const dataWargas = () => {
   return <DataWargas />;

@@ -32,6 +32,16 @@ const AddKaryawan = "/api/admin/insert/karyawan";
 const EditKaryawan = "/api/admin/update/karyawan";
 const DeleteKaryawan = "/api/admin/delete/karyawan";
 
+const ListRw = "/api/admin/list/rw";
+const AddRw = "/api/admin/insert/rw";
+const EditRw = "/api/admin/update/rw";
+const DeleteRw = "/api/admin/delete/rw";
+
+const ListRt = "/api/admin/list/rt";
+const AddRt = "/api/admin/insert/rt";
+const EditRt = "/api/admin/update/rt";
+const DeleteRt = "/api/admin/delete/rt";
+
 export {
   BASE_URL,
   Login,
@@ -58,4 +68,12 @@ export {
   AddKaryawan,
   EditKaryawan,
   DeleteKaryawan,
+  ListRw,
+  AddRw,
+  EditRw,
+  DeleteRw,
+  ListRt,
+  AddRt,
+  EditRt,
+  DeleteRt,
 };
