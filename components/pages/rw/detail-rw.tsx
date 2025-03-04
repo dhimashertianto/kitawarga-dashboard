@@ -7,6 +7,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Spinner,
   Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
@@ -141,7 +142,7 @@ export const DetailRw = ({ items }: { items: DataRwType }): JSX.Element => {
               Cancel
             </Button>
             <Button color="danger" variant="solid" onClick={handleDelete}>
-              Delete
+              {loading ? <Spinner size="sm" color="primary" /> : "Delete"}
             </Button>
           </ModalFooter>
         </ModalContent>
