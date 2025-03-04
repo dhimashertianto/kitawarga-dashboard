@@ -128,6 +128,18 @@ export const AddWargas = () => {
                     onChange={(e) => setAddWargaName(e.target.value)}
                   />
                   <Input
+                    label="Blok Rumah"
+                    variant="bordered"
+                    value={addWargaBlokRumah}
+                    onChange={(e) => setAddWargaBlokRumah(e.target.value)}
+                  />
+                  <Input
+                    label="Nomor Rumah"
+                    variant="bordered"
+                    value={addWargaNomorRumah}
+                    onChange={(e) => setAddWargaNomorRumah(e.target.value)}
+                  />
+                  <Input
                     label="Email"
                     variant="bordered"
                     value={addWargaEmail}
@@ -151,18 +163,6 @@ export const AddWargas = () => {
                         e.preventDefault();
                       }
                     }}
-                  />
-                  <Input
-                    label="Nomor Rumah"
-                    variant="bordered"
-                    value={addWargaNomorRumah}
-                    onChange={(e) => setAddWargaNomorRumah(e.target.value)}
-                  />
-                  <Input
-                    label="Blok Rumah"
-                    variant="bordered"
-                    value={addWargaBlokRumah}
-                    onChange={(e) => setAddWargaBlokRumah(e.target.value)}
                   />
                   <Input
                     label="Biaya Penambahan"

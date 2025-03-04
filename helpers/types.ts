@@ -169,3 +169,14 @@ export type ListWargaType = {
   expired_sub?: string;
   skema_bayar: string;
 };
+
+export type DataKaryawanType = {
+  id_karyawan: string;
+  nama_karyawan: string;
+  posisi: string;
+  sisa_kasbon: string;
+  id_perumahan: string;
+  gaji_bulanan: string;
+  createdAt: string;
+  updatedAt: string;
+};

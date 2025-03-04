@@ -27,6 +27,11 @@ const AddWarga = "/api/admin/insert/warga";
 const EditWarga = "/api/admin/update/warga";
 const DeleteWarga = "/api/admin/delete/warga";
 
+const ListKaryawan = "/api/admin/list/karyawan";
+const AddKaryawan = "/api/admin/insert/karyawan";
+const EditKaryawan = "/api/admin/update/karyawan";
+const DeleteKaryawan = "/api/admin/delete/karyawan";
+
 export {
   BASE_URL,
   Login,
@@ -49,4 +54,8 @@ export {
   AddWarga,
   EditWarga,
   DeleteWarga,
+  ListKaryawan,
+  AddKaryawan,
+  EditKaryawan,
+  DeleteKaryawan,
 };

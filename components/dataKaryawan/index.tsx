@@ -1,44 +1,42 @@
 // accounts.tsx
 "use client";
 import { fetchData } from "@/actions/api";
-import { TableWrapper } from "@/components/dataWarga/table/table";
+import { TableWrapper } from "@/components/dataKaryawan/table/table";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
-import { ListWarga } from "@/constants/constants";
-import { ListWargaType } from "@/helpers/types";
+import { ListKaryawan } from "@/constants/constants";
+import { DataKaryawanType } from "@/helpers/types";
 import { Alert } from "@heroui/react";
 import { Button, Input } from "@nextui-org/react";
+import Cookies from "js-cookie";
 import debounce from "lodash.debounce";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AddWargas } from "./add-warga";
-import { v4 as uuidv4 } from "uuid";
-import Cookies from "js-cookie";
 import { ExportIcon } from "../icons/accounts/export-icon";
-export const DataWargas = () => {
-  const router = useRouter();
+import { AddKaryawan } from "./add-karyawan";
 
-  const [warga, setWarga] = useState<ListWargaType[]>([]);
-  const [filteredWarga, setFilteredWarga] = useState<ListWargaType[]>([]);
+export const DataKaryawan = () => {
+  const [karyawan, setKaryawan] = useState<DataKaryawanType[]>([]);
+  const [filteredKaryawan, setFilteredKaryawan] = useState<DataKaryawanType[]>(
+    []
+  );
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    getWarga();
+    getKaryawan();
   }, []);
 
-  const getWarga = async () => {
+  const getKaryawan = async () => {
+    const id = Cookies.get("id_perumahan");
     try {
-      const id = Cookies.get("id_perumahan");
-      const response = await fetchData(ListWarga, {
+      const response = await fetchData(ListKaryawan, {
         id_perumahan: id,
-        param: "1",
-        nama: "",
       });
-      const data = response as { data: ListWargaType[] };
-      setWarga(data.data);
-      setFilteredWarga(data.data);
+      const data = response as { data: DataKaryawanType[] };
+      setKaryawan(data.data);
+      setFilteredKaryawan(data.data);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setIsError(true);
@@ -57,16 +55,19 @@ export const DataWargas = () => {
 
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
-    const filteredWarga = warga.reduce((result: ListWargaType[], warga) => {
-      if (
-        warga.nama_warga.toLowerCase().includes(searchValue) ||
-        warga.blok_rumah.toLowerCase().includes(searchValue)
-      ) {
-        result.push(warga);
-      }
-      return result;
-    }, []);
-    setFilteredWarga(filteredWarga);
+    const filteredKaryawan = karyawan.reduce(
+      (result: DataKaryawanType[], karyawan) => {
+        if (
+          karyawan.nama_karyawan.toLowerCase().includes(searchValue) ||
+          karyawan.posisi.toLowerCase().includes(searchValue)
+        ) {
+          result.push(karyawan);
+        }
+        return result;
+      },
+      []
+    );
+    setFilteredKaryawan(filteredKaryawan);
   }, 1000);
 
   const renderError = (title: string) => {
@@ -113,14 +114,14 @@ export const DataWargas = () => {
           />
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
-          <AddWargas />
+          <AddKaryawan />
           <Button color="primary" startContent={<ExportIcon />}>
             Export to CSV
           </Button>
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">
-        <TableWrapper items={filteredWarga} />
+        <TableWrapper items={filteredKaryawan} />
       </div>
     </div>
   );
