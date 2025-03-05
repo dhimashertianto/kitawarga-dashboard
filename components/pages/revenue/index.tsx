@@ -7,6 +7,7 @@ import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
 import { TableWrapper } from "@/components/pages/revenue/table/table";
 import { ListPemasukan } from "@/constants/constants";
 import { ListPemasukanType } from "@/helpers/types";
+import { exportToCSV } from "@/utils/exportUtils";
 import { Alert } from "@heroui/react";
 import { Button, Input } from "@nextui-org/react";
 import debounce from "lodash.debounce";
@@ -24,6 +25,29 @@ export const Revenue = () => {
   useEffect(() => {
     getPemasukan();
   }, []);
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredPemasukan,
+      filename: "Laporan Pemasukan",
+      headers: [
+        "Nama Pembayar",
+        "Nominal",
+        "Tanggal Transaksi",
+        "Created At",
+        "Updated At",
+      ],
+      mapper: (item) => [
+        item.nama_pembayar,
+        item.nilai_transaksi,
+        item.tanggal_transaksi,
+        item.bulan,
+        item.nomor_rumah,
+        item.createdAt,
+        item.updatedAt,
+      ],
+    });
+  };
 
   const getPemasukan = async () => {
     try {
@@ -106,7 +130,11 @@ export const Revenue = () => {
           />
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>

@@ -1,14 +1,16 @@
 // accounts.tsx
 "use client";
 import { getData } from "@/actions/api";
+import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
 import { AddCategory } from "@/components/pages/categorys/add-category";
 import { TableWrapper } from "@/components/pages/categorys/table/table"; // Import the table component
 import { ListKategori } from "@/constants/constants";
 import { ListCategoryType } from "@/helpers/types";
+import { exportToCSV } from "@/utils/exportUtils";
 import { Alert } from "@heroui/react";
-import { Input } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import debounce from "lodash.debounce";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -27,6 +29,18 @@ export const Categorys = () => {
   useEffect(() => {
     getCategory();
   }, []);
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredCategory,
+      filename: "Laporan Data Kategori",
+      headers: ["Nama Kategori", "Keterangan Kategori"],
+      mapper: (item) => [
+        item.nama_kategori_transaksi,
+        item.keterangan_kategori_transaksi,
+      ],
+    });
+  };
 
   const getCategory = async () => {
     try {
@@ -115,9 +129,13 @@ export const Categorys = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddCategory />
-          {/* <Button color="primary" startContent={<ExportIcon />}>
-            Export to CSV 
-          </Button> */}
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
+            Export to CSV
+          </Button>
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">

@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { AddRt } from "@/components/pages/rt/add-rt";
+import { exportToCSV } from "@/utils/exportUtils";
 
 export const DataRt = () => {
   const [rt, setRt] = useState<DataRtType[]>([]);
@@ -45,6 +46,15 @@ export const DataRt = () => {
         setErrorMessage("");
       }, 2500);
     }
+  };
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredRt,
+      filename: "rt_data",
+      headers: ["Nomor RT", "Created At", "Updated At"],
+      mapper: (item) => [item.nomor_rt, item.createdAt, item.updatedAt],
+    });
   };
 
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +113,11 @@ export const DataRt = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddRt />
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>

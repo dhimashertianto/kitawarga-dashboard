@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TableWrapper } from "@/components/pages/paychecks/table/table";
 import { ChevronDownIcon } from "@/components/icons/sidebar/chevron-down-icon";
+import { exportToCSV } from "@/utils/exportUtils";
 
 export const Paychecks = () => {
   const router = useRouter();
@@ -69,6 +70,15 @@ export const Paychecks = () => {
       years.push((currentYear - i).toString());
     }
     return years;
+  };
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredGaji,
+      filename: "Laporan Gaji Karyawan",
+      headers: ["Nama Karyawan", "Posisi", "Jumlah Gaji"],
+      mapper: (item) => [item.nama_karyawan, item.posisi, item.gaji_bulanan],
+    });
   };
 
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,7 +158,11 @@ export const Paychecks = () => {
               ))}
             </DropdownMenu>
           </Dropdown>
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>

@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TableWrapper } from "@/components/pages/loans/table/table";
 import { ChevronDownIcon } from "@/components/icons/sidebar/chevron-down-icon";
+import { exportToCSV } from "@/utils/exportUtils";
 
 export const Loans = () => {
   const router = useRouter();
@@ -61,6 +62,40 @@ export const Loans = () => {
 
     getKasbonKaryawan();
   }, [selectedYear]);
+
+  const handleExportCSV = () => {
+    const flattenedData = filteredKasbon.flatMap((kasbon) =>
+      kasbon.data.map((detail) => ({
+        nama_karyawan: kasbon.nama_karyawan,
+        bulan: kasbon.bulan,
+        pinjaman: detail.pinjaman,
+        sisa_kasbon: detail.sisa_kasbon,
+        gaji_bulanan: detail.gaji_bulanan,
+        angsuran_per_bulan: detail.angsuran_per_bulan,
+      }))
+    );
+
+    exportToCSV({
+      data: flattenedData,
+      filename: "Laporan Kasbon",
+      headers: [
+        "Nama Karyawan",
+        "Bulan",
+        "Pinjaman",
+        "Sisa Kasbon",
+        "Gaji Bulanan",
+        "Angsuran Per Bulan",
+      ],
+      mapper: (item) => [
+        item.nama_karyawan,
+        item.bulan,
+        item.pinjaman,
+        item.sisa_kasbon,
+        item.gaji_bulanan,
+        item.angsuran_per_bulan,
+      ],
+    });
+  };
 
   const generateYearOptions = () => {
     const currentYear = new Date().getFullYear();
@@ -148,7 +183,11 @@ export const Loans = () => {
               ))}
             </DropdownMenu>
           </Dropdown>
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>

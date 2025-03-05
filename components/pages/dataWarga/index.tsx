@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AddWargas } from "@/components/pages/dataWarga/add-warga";
+import { exportToCSV } from "@/utils/exportUtils";
 export const DataWargas = () => {
   const router = useRouter();
 
@@ -26,6 +27,35 @@ export const DataWargas = () => {
   useEffect(() => {
     getWarga();
   }, []);
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredWarga,
+      filename: "Laporan Data Warga",
+      headers: [
+        "Nama Warga",
+        "Blok Rumah",
+        "Nomor Rumah",
+        "Email",
+        "No HP",
+        "Status",
+        "Jenis Kelamin",
+        "Biaya IPL",
+        "Biaya Penambahan",
+      ],
+      mapper: (item) => [
+        item.nama_warga,
+        item.blok_rumah,
+        item.nomor_rumah,
+        item.email,
+        item.nomor_hp,
+        item.status_pernikahan,
+        item.jenis_kelamin,
+        item.biaya_ipl,
+        item.biaya_penambahan,
+      ],
+    });
+  };
 
   const getWarga = async () => {
     try {
@@ -113,7 +143,11 @@ export const DataWargas = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddWargas />
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>

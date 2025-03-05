@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AddUser } from "./add-user";
+import { exportToCSV } from "@/utils/exportUtils";
 
 export const Accounts = () => {
   const router = useRouter();
@@ -48,6 +49,31 @@ export const Accounts = () => {
         setErrorMessage("");
       }, 2500);
     }
+  };
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredPerumahan,
+      filename: "Laporan Data Perumahan",
+      headers: [
+        "Nama Perumahan",
+        "Alamat Perumahan",
+        "Saldo Perumahan",
+        "Nama Pemilik Rekening",
+        "Kode Bank",
+        "Status Rekening",
+        "Nama Pemilik Rekening",
+      ],
+      mapper: (item) => [
+        item.nama_perumahan,
+        item.alamat_perumahan,
+        item.saldo_perumahan,
+        item.account_holder_name ?? "",
+        item.bank_code ?? "",
+        item.status_account ?? "",
+        item.account_holder_name ?? "",
+      ],
+    });
   };
 
   const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,9 +138,13 @@ export const Accounts = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddUser />
-          {/* <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
-          </Button> */}
+          </Button>
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">

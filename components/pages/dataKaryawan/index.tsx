@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { AddKaryawan } from "@/components/pages/dataKaryawan/add-karyawan";
+import { exportToCSV } from "@/utils/exportUtils";
 
 export const DataKaryawan = () => {
   const [karyawan, setKaryawan] = useState<DataKaryawanType[]>([]);
@@ -27,6 +28,15 @@ export const DataKaryawan = () => {
   useEffect(() => {
     getKaryawan();
   }, []);
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredKaryawan,
+      filename: "Laporan Data Karyawan",
+      headers: ["Nama Karyawan", "Posisi", "Gaji Bulanan"],
+      mapper: (item) => [item.nama_karyawan, item.posisi, item.gaji_bulanan],
+    });
+  };
 
   const getKaryawan = async () => {
     const id = Cookies.get("id_perumahan");
@@ -115,7 +125,11 @@ export const DataKaryawan = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddKaryawan />
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>

@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { AddRw } from "@/components/pages/rw/add-rw";
+import { exportToCSV } from "@/utils/exportUtils";
 
 export const DataRw = () => {
   const [rw, setRw] = useState<DataRwType[]>([]);
@@ -57,6 +58,15 @@ export const DataRw = () => {
     }, []);
     setFilteredRw(filteredRw);
   }, 1000);
+
+  const handleExportCSV = () => {
+    exportToCSV({
+      data: filteredRw,
+      filename: "rw_data",
+      headers: ["Nomor RW", "Created At", "Updated At"],
+      mapper: (item) => [item.nomor_rw, item.createdAt, item.updatedAt],
+    });
+  };
 
   const renderError = (title: string) => {
     return (
@@ -103,7 +113,11 @@ export const DataRw = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddRw />
-          <Button color="primary" startContent={<ExportIcon />}>
+          <Button
+            color="primary"
+            startContent={<ExportIcon />}
+            onClick={handleExportCSV}
+          >
             Export to CSV
           </Button>
         </div>
