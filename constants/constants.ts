@@ -42,6 +42,13 @@ const AddRt = "/api/admin/insert/rt";
 const EditRt = "/api/admin/update/rt";
 const DeleteRt = "/api/admin/delete/rt";
 
+const BiayaPenambahan = '/api/warga/findPenambahanBiaya';
+const DiskonWarga = '/api/diskon/findAllByPerumahanAndTahunAndIdWarga';
+const IplPerumahanAndTahun = '/api/ipl/findAllByPerumahanAndTahun';
+
+const WargaConst = 'warga';
+const AdminConst = '2c452346-3429-11ee-be56-0242ac120002'
+
 export {
   BASE_URL,
   Login,
@@ -76,4 +83,9 @@ export {
   AddRt,
   EditRt,
   DeleteRt,
+  BiayaPenambahan,
+  DiskonWarga,
+  IplPerumahanAndTahun,
+  WargaConst,
+  AdminConst
 };

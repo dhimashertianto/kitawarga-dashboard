@@ -8,9 +8,10 @@ interface Props {
   icon: React.ReactNode;
   isActive?: boolean;
   href?: string;
+  isHide?: boolean;
 }
 
-export const SidebarItem = ({ icon, title, isActive, href = "" }: Props) => {
+export const SidebarItem = ({ icon, title, isActive, href = "", isHide }: Props) => {
   const { collapsed, setCollapsed } = useSidebarContext();
 
   const handleClick = () => {
@@ -18,6 +19,11 @@ export const SidebarItem = ({ icon, title, isActive, href = "" }: Props) => {
       setCollapsed();
     }
   };
+
+  if (isHide) {
+    return null;
+  }
+
   return (
     <NextLink
       href={href}
