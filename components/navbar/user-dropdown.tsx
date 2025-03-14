@@ -7,10 +7,11 @@ import {
   Navbar,
   NavbarItem,
 } from "@nextui-org/react";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
 import { useRouter } from "next/navigation";
 import { deleteAuthCookie } from "@/actions/auth.action";
+import Cookies from "js-cookie";
 
 export const UserDropdown = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ export const UserDropdown = () => {
             as='button'
             color='secondary'
             size='md'
-            src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+            src='https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg'
           />
         </DropdownTrigger>
       </NavbarItem>
@@ -38,15 +39,15 @@ export const UserDropdown = () => {
         <DropdownItem
           key='profile'
           className='flex flex-col justify-start w-full items-start'>
-          <p>Signed in as</p>
-          <p>zoey@example.com</p>
+          <p>Login sebagai </p>
+          <p>{Cookies.get("nama")}</p>
         </DropdownItem>
-        <DropdownItem key='settings'>My Settings</DropdownItem>
+        {/* <DropdownItem key='settings'>My Settings</DropdownItem>
         <DropdownItem key='team_settings'>Team Settings</DropdownItem>
         <DropdownItem key='analytics'>Analytics</DropdownItem>
         <DropdownItem key='system'>System</DropdownItem>
         <DropdownItem key='configurations'>Configurations</DropdownItem>
-        <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem>
+        <DropdownItem key='help_and_feedback'>Help & Feedback</DropdownItem> */}
         <DropdownItem
           key='logout'
           color='danger'
@@ -55,6 +56,7 @@ export const UserDropdown = () => {
           Log Out
         </DropdownItem>
         <DropdownItem key='switch'>
+          <span>Dark Mode</span> <br/><br/>
           <DarkModeSwitch />
         </DropdownItem>
       </DropdownMenu>

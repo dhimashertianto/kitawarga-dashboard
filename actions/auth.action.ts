@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export type AuthCookie = {
   token: string;
-  nama: string;
+  username: string;
   id_perumahan: string;
   id_warga: string;
   biaya_ipl: string;
@@ -22,7 +22,7 @@ export const createAuthCookie = async (authCookie: AuthCookie) => {
     expires: new Date(Date.now() + 60 * 60 * 1000),
     maxAge: 60 * 60,
   });
-  cookieStore.set("nama", authCookie.nama, {
+  cookieStore.set("nama", authCookie.username, {
     secure: true,
     //httpOnly: true,
     sameSite: "lax",

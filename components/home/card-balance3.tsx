@@ -1,23 +1,28 @@
 import { Card, CardBody } from "@nextui-org/react";
 import React from "react";
 import { Community } from "../icons/community";
+import { PaymentsIconWhite } from "../icons/sidebar/payments-icon";
 
-export const CardBalance3 = () => {
+type Props = {
+  pengeluaran: string;
+};
+
+export const CardBalance3 = ({ pengeluaran }: Props) => {
   return (
     <Card className="xl:max-w-sm bg-success rounded-xl shadow-md px-3 w-full">
       <CardBody className="py-5">
         <div className="flex gap-2.5">
-          <Community />
+          <PaymentsIconWhite />
           <div className="flex flex-col">
-            <span className="text-white">Card Insurance</span>
-            <span className="text-white text-xs">1311 Cars</span>
+            <span className="text-white">Total Pengeluaran</span>
+            {/* <span className="text-white text-xs">1311 Cars</span> */}
           </div>
         </div>
         <div className="flex gap-2.5 py-2 items-center">
-          <span className="text-white text-xl font-semibold">$3,910</span>
-          <span className="text-danger text-xs">- 4.5%</span>
+          <span className="text-white text-xl font-semibold">{pengeluaran}</span>
+          <span className="text-danger text-s">-</span>
         </div>
-        <div className="flex items-center gap-6">
+        {/* <div className="flex items-center gap-6">
           <div>
             <div>
               <span className="font-semibold text-danger text-xs">{"↓"}</span>
@@ -41,7 +46,7 @@ export const CardBalance3 = () => {
             </div>
             <span className="text-white text-xs">VIP</span>
           </div>
-        </div>
+        </div> */}
       </CardBody>
     </Card>
   );

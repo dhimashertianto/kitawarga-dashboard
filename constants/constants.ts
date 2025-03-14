@@ -47,7 +47,10 @@ const DiskonWarga = '/api/diskon/findAllByPerumahanAndTahunAndIdWarga';
 const IplPerumahanAndTahun = '/api/ipl/findAllByPerumahanAndTahun';
 
 const WargaConst = 'warga';
-const AdminConst = '2c452346-3429-11ee-be56-0242ac120002'
+const AdminConst = '2c452346-3429-11ee-be56-0242ac120002';
+const SuperAdminConst = '529a4642-575a-438e-91ca-c6f744ed0554';
+
+const DashboardURL = '/api/admin/mock/data';
 
 export {
   BASE_URL,
@@ -87,5 +90,7 @@ export {
   DiskonWarga,
   IplPerumahanAndTahun,
   WargaConst,
-  AdminConst
+  AdminConst,
+  SuperAdminConst,
+  DashboardURL
 };

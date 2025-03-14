@@ -54,6 +54,18 @@ export const RenderCell = ({
           <span>{formatCurrency(parseInt(pemasukan.nilai_transaksi))}</span>
         </div>
       );
+    case "fee_kitawarga":
+      return (
+        <div>
+          <span>{formatCurrency(parseInt(pemasukan.fee_kitawarga))}</span>
+        </div>
+    )
+    case "fee_biaya_pembayaran":
+      return (
+        <div>
+          <span>{formatCurrency(parseInt(pemasukan.fee_biaya_pembayaran))}</span>
+        </div>
+      )
     default:
       return <span>{cellValue}</span>;
   }

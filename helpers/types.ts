@@ -45,6 +45,8 @@ export type ListPemasukanType = {
   createdAt: string;
   updatedAt: string;
   bulan: string;
+  fee_kitawarga: string;
+  fee_biaya_pembayaran: string;
 };
 
 export type ListGajiKaryawanType = {
@@ -198,3 +200,12 @@ export type DataRtType = {
   updatedAt: string;
   nomor_rw: string;
 };
+
+export type DataDashboardType = {
+  total_saldo: string;
+  total_pemasukan_bulan_ini: string;
+  total_pengeluaran_bulan_ini: string;
+  selisih: string;
+  saldo_pengurus: string;
+  saldo_xendit: string;
+}

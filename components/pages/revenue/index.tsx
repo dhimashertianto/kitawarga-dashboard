@@ -5,11 +5,12 @@ import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
 import { TableWrapper } from "@/components/pages/revenue/table/table";
-import { ListPemasukan } from "@/constants/constants";
+import { ListPayment, ListPemasukan } from "@/constants/constants";
 import { ListPemasukanType } from "@/helpers/types";
 import { exportToCSV } from "@/utils/exportUtils";
 import { Alert } from "@heroui/react";
 import { Button, Input } from "@nextui-org/react";
+import Cookies from "js-cookie";
 import debounce from "lodash.debounce";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -36,6 +37,8 @@ export const Revenue = () => {
         "Tanggal Transaksi",
         "Created At",
         "Updated At",
+        "Fee Kitawarga",
+        "Fee Biaya Pembayaran",
       ],
       mapper: (item) => [
         item.nama_pembayar,
@@ -45,6 +48,8 @@ export const Revenue = () => {
         item.nomor_rumah,
         item.createdAt,
         item.updatedAt,
+        item.fee_kitawarga,
+        item.fee_biaya_pembayaran,
       ],
     });
   };
@@ -52,7 +57,10 @@ export const Revenue = () => {
   const getPemasukan = async () => {
     try {
       const response: { data: ListPemasukanType[] } = await fetchData(
-        ListPemasukan
+        ListPayment,{
+          id_perumahan: Cookies.get("id_perumahan"),
+          id_warga: Cookies.get("id_warga"),
+        }
       );
       setPemasukan(response.data);
       setFilteredPemasukan(response.data);

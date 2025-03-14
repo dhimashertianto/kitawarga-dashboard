@@ -36,7 +36,7 @@ export const Login = () => {
 
         const authCookie: AuthCookie = {
           token: res.data?.accessToken,
-          nama: res.data?.nama,
+          username: res.data?.username ?? res.data?.nama_warga,
           id_perumahan: res.data?.id_perumahan,
           id_warga: res.data?.id_warga,
           biaya_ipl: res.data?.biaya_ipl,
