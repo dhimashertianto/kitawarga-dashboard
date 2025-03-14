@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { TableWrapper } from "../table/table";
+import { TableWrapper } from "../../components/pages/revenue/table/table";
 import { CardBalance1 } from "./card-balance1";
 import { CardBalance2 } from "./card-balance2";
 import { CardBalance3 } from "./card-balance3";
@@ -10,9 +10,9 @@ import { CardTransactions } from "./card-transactions";
 import { Link } from "@nextui-org/react";
 import NextLink from "next/link";
 import { fetchData } from "@/actions/api";
-import { DashboardURL } from "@/constants/constants";
+import { DashboardURL, ListPayment } from "@/constants/constants";
 import Cookies from "js-cookie";
-import { DataDashboardType } from "@/helpers/types";
+import { DataDashboardType, ListPemasukanType } from "@/helpers/types";
 import { Alert } from "@heroui/react";
 import { formatCurrency } from "@/helpers/format";
 
@@ -34,6 +34,39 @@ export const Content = () => {
     saldo_pengurus: "",
     saldo_xendit: "",
   });
+    const [filteredPemasukan, setFilteredPemasukan] = useState<
+      ListPemasukanType[]
+    >([]);
+
+
+    useEffect(() => {
+      getPemasukan();
+    }, []);
+
+    const getPemasukan = async () => {
+      try {
+        const response: { data: ListPemasukanType[] } = await fetchData(
+          ListPayment,{
+            id_perumahan: Cookies.get("id_perumahan"),
+            id_warga: Cookies.get("id_warga"),
+          }
+        );
+        setFilteredPemasukan(response.data);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setIsError(true);
+          setErrorMessage(error.message);
+        } else {
+          setIsError(true);
+          setErrorMessage("An unknown error occurred");
+        }
+      } finally {
+        setTimeout(() => {
+          setIsError(false);
+          setErrorMessage("");
+        }, 2500);
+      }
+    };
 
   const getDashboard = async () => {
     try {
@@ -111,11 +144,11 @@ export const Content = () => {
       </div>
 
       {/* Table Latest Users */}
-      {/* <div className="flex flex-col justify-center w-full py-5 px-4 lg:px-0  max-w-[90rem] mx-auto gap-3">
+      <div className="flex flex-col justify-center w-full py-5 px-4 lg:px-0  max-w-[90rem] mx-auto gap-3">
         <div className="flex  flex-wrap justify-between">
-          <h3 className="text-center text-xl font-semibold">Latest Users</h3>
+          <h3 className="text-center text-xl font-semibold">Pembayaran Terakhir</h3>
           <Link
-            href="/accounts"
+            href="/revenue"
             as={NextLink}
             color="primary"
             className="cursor-pointer"
@@ -123,8 +156,8 @@ export const Content = () => {
             View All
           </Link>
         </div>
-        <TableWrapper />
-      </div> */}
+         <TableWrapper items={filteredPemasukan} />
+      </div>
     </div>
   );
 };
