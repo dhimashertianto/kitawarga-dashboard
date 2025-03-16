@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AddWargas } from "@/components/pages/dataWarga/add-warga";
 import { exportToCSV } from "@/utils/exportUtils";
+import { AddWargasImport } from "./add-warga-import";
 export const DataWargas = () => {
   const router = useRouter();
 
@@ -143,6 +144,7 @@ export const DataWargas = () => {
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
           <AddWargas />
+          <AddWargasImport />
           <Button
             color="primary"
             startContent={<ExportIcon />}

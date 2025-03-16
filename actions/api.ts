@@ -74,3 +74,47 @@ export const fetchData = async <T>(
     );
   }
 };
+
+
+export const fetchFormData = async <T>(
+  endpoint: string,
+  payload?: Object | FormData
+): Promise<T> => {
+  const token = Cookies.get("token");
+
+  if (!token) {
+    throw new Error("Please relogin");
+  }
+
+  try {
+    const isFormData = payload instanceof FormData;
+
+    const { status, data } = await axios.post(
+      `${BASE_URL}${endpoint}`,
+      payload || {},
+      {
+        headers: {
+          "x-access-token": token,
+          ...(isFormData ? {} : { "Content-Type": "application/json" }), // Axios auto-sets FormData headers
+        },
+      }
+    );
+
+    if (status === 401) {
+      await deleteAuthCookie();
+      throw new Error("Unauthorized - Please login again.");
+    }
+
+    if (status !== 200) {
+      throw new Error(data.message || "An error occurred");
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : `An unknown error occurred: ${error}`
+    );
+  }
+};

@@ -51,6 +51,8 @@ const AdminConst = '2c452346-3429-11ee-be56-0242ac120002';
 const SuperAdminConst = '529a4642-575a-438e-91ca-c6f744ed0554';
 
 const DashboardURL = '/api/admin/mock/data';
+const UploadWarga ='/api/warga/uploadExcel';
+const AddPerumahanUrl ='/api/admin/insert/perumahan';
 
 export {
   BASE_URL,
@@ -92,5 +94,7 @@ export {
   WargaConst,
   AdminConst,
   SuperAdminConst,
-  DashboardURL
+  DashboardURL,
+  UploadWarga,
+  AddPerumahanUrl
 };

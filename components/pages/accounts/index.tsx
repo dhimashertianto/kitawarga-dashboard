@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AddUser } from "./add-user";
 import { exportToCSV } from "@/utils/exportUtils";
+import { AddPerumahan } from "./add-perumahan";
 
 export const Accounts = () => {
   const router = useRouter();
@@ -137,7 +138,7 @@ export const Accounts = () => {
           />
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
-          <AddUser />
+          <AddPerumahan />
           <Button
             color="primary"
             startContent={<ExportIcon />}
