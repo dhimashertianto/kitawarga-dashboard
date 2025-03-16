@@ -2,7 +2,7 @@ import { Alert } from "@heroui/react";
 
 interface ErrorAlertProps {
   title: string;
-  color: "danger" | "warning" | "info" | "success"; // You can customize the color types
+  color: "danger" | "warning" | "success"; // You can customize the color types
 }
 
 export const ErrorAlert = ({ title, color }: ErrorAlertProps) => {
