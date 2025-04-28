@@ -73,6 +73,7 @@ export const Payment = () => {
   const [statikFee, setStatikFee] = useState<number>(0);
   const [presentaseFee, setPresentaseFee] = useState<number>(0);
   const [totalPembayaran, setTotalPembayaran] = useState<number>(0);
+  const [typePayment, setTypePayment] = useState<string>("1");
 
   const renderError = (title: string) => {
     return (
@@ -287,6 +288,8 @@ export const Payment = () => {
     getDetailWarga();
     getListPayment();
     getIPLPerumahan(selectedYears);
+    const type_payment = Cookies.get("type_payment");
+    setTypePayment(type_payment ?? "1") ;
   }, []);
 
   useEffect(() => {
@@ -344,7 +347,7 @@ export const Payment = () => {
         list_bulan: selectedMonths,
         amountList: String(Number(biaya_ipl) * selectedMonths.length),
         tahun: selectedYears,
-        type_payment: "1",
+        type_payment: typePayment,
       });
 
       if (res.status !== 200) {
@@ -479,7 +482,7 @@ export const Payment = () => {
               ) : (
                 <>
                   <h5 className="text-small tracking-tight text-default-400">
-                    {`Biaya IPL : Rp.${biayaIpl}`}
+                    {`Biaya IPL : Rp.${typePayment == "3" ? Math.floor((Number(biayaIpl) * selectedMonths.length) - (Number(statikFee) * selectedMonths.length) -  ((0.7 / 100) * (Number(biayaIpl) * selectedMonths.length))) : biayaIpl}`}
                   </h5>
                   {Number(biayaPenambahan) > 0 && <h5 className="text-small tracking-tight text-success-400">
                     {`Biaya Tambahan : + Rp.${Number(biayaPenambahan) * selectedMonths.length}`}
@@ -488,10 +491,10 @@ export const Payment = () => {
                     {`Diskon Pembayaran : - Rp.${Number(diskonWarga) * selectedMonths.length}`}
                   </h5>}
                   <h5 className="text-small tracking-tight text-default-400">
-                    {`Biaya Qris : Rp.${Math.ceil((0.7 / 100) * (Number(totalPembayaran) + Number(statikFee) * selectedMonths.length))}`}
+                    {`Biaya Platform : Rp.${statikFee * selectedMonths.length}`}
                   </h5>
                   <h5 className="text-small tracking-tight text-default-400">
-                    {`Biaya Platform : Rp.${statikFee * selectedMonths.length}`}
+                    {`Biaya Qris : Rp.${Math.ceil((0.7 / 100) * (Number(totalPembayaran) + Number(statikFee) * selectedMonths.length))}`}
                   </h5>
                 </>
               )}
@@ -504,7 +507,10 @@ export const Payment = () => {
                 </Skeleton>
               ) : (
                 <h5 className="text-default-600 tracking-tight text-primary-400">
-                  {`Rp.${Math.ceil(((0.7 / 100) * (Number(totalPembayaran) + Number(statikFee) * selectedMonths.length)) + totalPembayaran + (Number(statikFee) * selectedMonths.length))}`}
+                  {`Rp.${
+                    typePayment == "3" ? totalPembayaran : (Math.ceil(((0.7 / 100) * (Number(totalPembayaran) + Number(statikFee) * selectedMonths.length)) 
+                    + totalPembayaran 
+                    + (Number(statikFee) * selectedMonths.length)))}`}
                 </h5>
               )}
             </div>

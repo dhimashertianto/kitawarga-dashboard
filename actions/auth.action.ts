@@ -9,6 +9,7 @@ export type AuthCookie = {
   id_warga: string;
   biaya_ipl: string;
   role: string;
+  type_payment: string;
 };
 
 export const createAuthCookie = async (authCookie: AuthCookie) => {
@@ -70,6 +71,14 @@ export const createAuthCookie = async (authCookie: AuthCookie) => {
     maxAge: 60 * 60,
     expires: new Date(Date.now() + 60 * 60 * 1000),
   });
+  cookieStore.set("type_payment", authCookie.type_payment, {
+    secure: true,
+    //httpOnly: true,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60,
+    expires: new Date(Date.now() + 60 * 60 * 1000),
+  });
 };
 
 export const deleteAuthCookie = async () => {
@@ -80,4 +89,5 @@ export const deleteAuthCookie = async () => {
   cookies().delete("id_warga");
   cookies().delete("biaya_ipl");
   cookies().delete("role");
+  cookies().delete("type_payment");
 };

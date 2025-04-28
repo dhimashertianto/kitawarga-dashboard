@@ -40,7 +40,8 @@ export const Login = () => {
           id_perumahan: res.data?.id_perumahan,
           id_warga: res.data?.id_warga,
           biaya_ipl: res.data?.biaya_ipl,
-          role: res.data?.role
+          role: res.data?.role,
+          type_payment: res.data?.type_payment_ipl,
         };
 
         await createAuthCookie(authCookie);
